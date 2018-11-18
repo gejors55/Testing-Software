@@ -19,27 +19,35 @@ public class DivisaTestTemplate {
 
 	@Test
 	public void testGetName() {
-		fail("No implementado");
+		assertEquals(SEK.getName(), "SEK");
+		assertEquals(DKK.getName(), "DKK");
+		assertEquals(EUR.getName(), "EUR");
 	}
 	
 	@Test
 	public void testGetRate() {
-		fail("No implementado");
+		assertEquals(SEK.getRate(), (Double)(0.15));
+		assertEquals(DKK.getRate(), (Double)(0.20));
+		assertEquals(EUR.getRate(), (Double)(1.5));
 	}
 	
 	@Test
 	public void testSetRate() {
-		fail("No implementado");
+		EUR.setRate(1.2);
+		assertEquals(EUR.getRate(), (Double)(1.2));
 	}
 	
 	@Test
 	public void testGlobalValue() {
-		fail("No implementado");
+		
+		assertTrue(SEK.valorUniversal(1000)==(int)150);
+		assertTrue(DKK.valorUniversal(1000)==(int)200);
+		assertTrue(EUR.valorUniversal(1000)==(int)1500);
 	}
 	
 	@Test
 	public void testValueEnEstaDivisa() {
-		fail("No implementado");
+		assertEquals(1000, SEK.valorEnEstaDivisa(100,EUR));
 	}
 
 }

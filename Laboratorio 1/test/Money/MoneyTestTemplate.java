@@ -30,51 +30,93 @@ public class MoneyTestTemplate {
 
 	@Test
 	public void testGetCantidad() {
-		fail("No implementado");
+		
+		assertEquals(EUR10.getCantidad(),1000);
+		assertEquals(SEK100.getCantidad(),10000);
+		assertEquals(SEK200.getCantidad(),20000);
+		assertEquals(EUR20.getCantidad(),2000);
+		assertEquals(SEK0.getCantidad(),0);
+		assertEquals(EUR0.getCantidad(),0);
+		assertEquals(SEKn100.getCantidad(),-10000);
+
 	}
 
 	@Test
 	public void testGetDivisa() {
-		fail("No implementado");
+		
+		assertEquals(SEK100.getDivisa(), SEK);
+		assertEquals(EUR10.getDivisa(), EUR);
+		assertEquals(SEK200.getDivisa(), SEK);
+		assertEquals(EUR20.getDivisa(), EUR);
+		assertEquals(SEK0.getDivisa(), SEK);
+		assertEquals(EUR0.getDivisa(), EUR);
+		assertEquals(SEKn100.getDivisa(), SEK);
 	}
 
 	@Test
 	public void testToString() {
-		fail("No implementado");
+		
+		assertEquals("100.0 SEK", SEK100.toString());
+		assertEquals("200.0 SEK", SEK200.toString());
+		assertEquals("0.0 SEK", SEK0.toString());
+		assertEquals("-100.0 SEK", SEKn100.toString());
+		assertEquals("10.0 EUR", EUR10.toString());
+		assertEquals("20.0 EUR", EUR20.toString());
+		assertEquals( "0.0 EUR", EUR0.toString());
 	}
 
 	@Test
 	public void testGlobalValue() {
-		fail("No implementado");
+		
+		assertEquals(1500, SEK100.valorUniversal());
+		assertEquals(3000, SEK200.valorUniversal());
+		assertEquals(0, SEK0.valorUniversal());
+		assertEquals(-1500, SEKn100.valorUniversal());
+		assertEquals(1500, EUR10.valorUniversal());
+		assertEquals(3000, EUR20.valorUniversal());
 	}
 
 	@Test
 	public void testEqualsMoney() {
-		fail("No implementado");
+		assertTrue(SEK0.equals(EUR0));
+		assertTrue(EUR10.equals(SEK100));
+		assertTrue(EUR20.equals(SEK200));
 	}
 
 	@Test
 	public void testAdd() {
-		fail("No implementado");
+		
+		Money EUR30=EUR10.add(EUR20);
+		Money SEKN0=EUR10.add(SEKn100);
+		
+		assertTrue(EUR30.getCantidad()==3000);
+		assertTrue(EUR30.getDivisa().getName()=="EUR");
+		assertTrue(SEKN0.getCantidad()==0);
+		assertTrue(SEKN0.getDivisa().getName()=="EUR");
 	}
 
-	@Test
-	public void testSub() {
-		fail("No implementado");
-	}
 
 	@Test
 	public void testIsZero() {
-		fail("No implementado");
+		assertTrue(EUR0.isZero());
+		assertTrue(SEK0.isZero());
 	}
 
 	@Test
 	public void testNegate() {
-		fail("No implementado");
+		
+		Money EURneg = EUR10.negate();
+		assertEquals(-1000, EURneg.getCantidad());
+		assertTrue(EURneg.getDivisa().getName()=="EUR");
+		
 	}
 
 	@Test
 	public void testCompareTo() {
-		fail("No implementado");		
+		
+		assertTrue(EUR20.compareTo(EUR10) > 0);
+		assertTrue(EUR10.compareTo(SEK100) == 0);
+		assertTrue(EUR10.compareTo(EUR20) < 0);
+		
 	}
 }
